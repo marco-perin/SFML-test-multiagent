@@ -35,38 +35,23 @@ void Scene::init_grid(std::vector<std::array<sf::Vertex, 2Ui64>>& lines)
 	// Draw the two starting lines
 	std::array<sf::Vertex, 2> line;
 
-	line = {
-		sf::Vertex(sf::Vector2f(1, 0)),
-		sf::Vertex(sf::Vector2f(1, SIZE_R))
-	};
-
-	lines.push_back(line);
-
-	line = {
-		sf::Vertex(sf::Vector2f(0     , 1)),
-		sf::Vertex(sf::Vector2f(SIZE_R, 1))
-	};
-
-	lines.push_back(line);
-
-	uint16_t gridspace_x = SIZE_C / NUMCELLS_C;
-	for (int x = 0; x < SIZE_C + 1; x += gridspace_x)
+	for (int x = GRID_PADDING; x < SIZE_C - GRID_PADDING + 1; x += CELLSIZE_C)
 	{
 
 		line = {
-			sf::Vertex(sf::Vector2f(x, 0)),
-			sf::Vertex(sf::Vector2f(x, SIZE_R))
+			sf::Vertex(sf::Vector2f(x, GRID_PADDING)),
+			sf::Vertex(sf::Vector2f(x, SIZE_R - GRID_PADDING))
 		};
 
 		lines.push_back(line);
 	}
 
-	uint16_t gridspace_y = SIZE_R / NUMCELLS_R;
-	for (int y = 0; y < SIZE_R + 1; y += gridspace_y)
+
+	for (int y = GRID_PADDING; y < SIZE_C - GRID_PADDING + 1; y += CELLSIZE_R)
 	{
 		line = {
-			sf::Vertex(sf::Vector2f(0     , y)),
-			sf::Vertex(sf::Vector2f(SIZE_R, y))
+			sf::Vertex(sf::Vector2f(GRID_PADDING,	  y)),
+			sf::Vertex(sf::Vector2f(SIZE_R - GRID_PADDING, y))
 		};
 
 		lines.push_back(line);
